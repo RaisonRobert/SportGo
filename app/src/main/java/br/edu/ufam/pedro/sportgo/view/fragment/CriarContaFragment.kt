@@ -2,6 +2,7 @@ package br.edu.ufam.pedro.sportgo.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,11 +64,13 @@ class CriarContaFragment: Fragment() {
                 emailLayout.isErrorEnabled = false
                 senhaLayout.isErrorEnabled = false
                 if (validaConta(email)){
+                    val switch = verificaBotaoDef(view)
+                    Log.i("teste", "botao deficiencia $switch")
                     val user = DadosLogin(
                         nome = nome,
                         email = email,
                         senha = senha,
-                        deficiente = true
+                        deficiente = switch
                     )
 //                    INSERE DADOS
                     userDao.salvaDados(user)
@@ -83,7 +86,7 @@ class CriarContaFragment: Fragment() {
 //                    BancodeDados.dadosUser.senha = senha
                     setPreferencesLogin(email, senha)
                     dialogContaCadastrada()
-//                    Log.i("teste","banco de dados: ${userDao.buscarDados()}")
+                    Log.i("teste","banco de dados: ${userDao.buscarDados()}")
                 }else {
                     emailLayout.error = getString(R.string.emailCadastrado)
                 }
@@ -107,6 +110,14 @@ class CriarContaFragment: Fragment() {
                         senhaLayout.error = getString(R.string.vazio)
                     }
 
+    }
+
+    private fun verificaBotaoDef(view: View): Boolean {
+        var resp = false
+            if (view.btnDeficiente.isChecked) {
+                resp = true
+            }
+        return resp
     }
 
     private fun dialogContaCadastrada() {
