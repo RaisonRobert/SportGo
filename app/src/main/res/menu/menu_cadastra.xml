@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menuAlterarDados"
+        android:title="Alterar Dados"
+        android:icon="@drawable/ic_edit"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menuApagarConta"
+        android:icon="@drawable/ic_delete_forever"
+        android:title="Excluir Cadastro"
+        app:showAsAction="ifRoom"
+        />
+
+</menu>

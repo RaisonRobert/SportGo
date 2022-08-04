@@ -15,6 +15,7 @@ import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
 import br.edu.ufam.pedro.sportgo.controller.ui.Ui
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
 import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
+import br.edu.ufam.pedro.sportgo.model.banco.Preferences
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.layout_fragment_alterar_dados.view.*
 import kotlinx.android.synthetic.main.layout_fragment_alterar_dados.view.btnDeficiente
@@ -69,6 +70,7 @@ class AlterarDadosFragment : Fragment(){
             BancodeDados.dadosUser.deficiente = switch
             userDao.alterarDados(BancodeDados.dadosUser)
             Ui.atualizaLista(userDao.buscarDados())
+            setPreferencesLogin(senha)
             dialogLogin()
         } else if (nome.isEmpty()) {
             nomeLayout.isErrorEnabled = false
@@ -108,7 +110,9 @@ class AlterarDadosFragment : Fragment(){
         return false
     }
 
-
+    private fun setPreferencesLogin(senha: String) {
+        Preferences.setSenha(requireContext(), senha)
+    }
     private fun setDadosAlterar(view: View) {
         view.nomefieldAlterar.setText(BancodeDados.dadosUser.nome)
         view.emailfieldtextAlterar.setText(BancodeDados.dadosUser.email)

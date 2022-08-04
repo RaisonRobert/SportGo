@@ -6,6 +6,8 @@ import br.edu.ufam.pedro.sportgo.model.entidade.DadosLogin
 
 @Dao
 interface DadosDao{
+    @Query("SELECT * FROM DadosLogin WHERE id = :id")
+    fun buscarAdmin(id: Long): DadosLogin?
 
     @Query("SELECT * FROM DadosLogin")
     fun buscarDados(): List<DadosLogin>

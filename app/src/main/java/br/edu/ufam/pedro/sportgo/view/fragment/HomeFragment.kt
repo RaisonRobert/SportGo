@@ -62,7 +62,6 @@ class HomeFragment: Fragment() {
             val headerLayout = view.findViewById<View>(R.id.headerView)
             val titlePage = headerLayout.findViewById<TextView>(R.id.title)
             titlePage.setText(getString(R.string.aprendendo_libraas))
-
     }
     private fun setupMenu() {
         val menuItens = ArrayList<MenuSquareItem>()

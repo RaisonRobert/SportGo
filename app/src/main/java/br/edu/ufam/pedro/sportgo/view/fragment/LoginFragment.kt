@@ -15,7 +15,9 @@ import br.edu.ufam.pedro.sportgo.controller.ui.Ui
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
 import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
 import br.edu.ufam.pedro.sportgo.model.banco.Preferences
+import br.edu.ufam.pedro.sportgo.model.entidade.DadosLogin
 import br.edu.ufam.pedro.sportgo.view.activity.HomeActivity
+import br.edu.ufam.pedro.sportgo.view.activity.HomeAdminActivity
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.layout_fragment_login.view.*
 
@@ -42,20 +44,41 @@ class LoginFragment: Fragment() {
         loading = Ui.createLoadDialog(requireContext(), false)
         Ui.atualizaLista(userDao.buscarDados())
 //        setPreferencesLogin("", "")
+        criaAdmin()
             Log.i("teste", "email: ${Preferences.getEmail(requireContext())}")
             Log.i("teste", "senha: ${Preferences.getSenha(requireContext())}")
 //        Log.i("teste", "banco de dados lista: ${BancodeDados.arquivosDadosCadastrado}")
         if (verificarLogin()) {
             startHome()
-//
         } else {
             setPreferencesLogin("", "")
         }
         botoes(view)
     }
+
+    private fun criaAdmin() {
+        if(userDao.buscarDados().isEmpty()){
+        userDao.salvaDados(DadosLogin(
+            id = 1,
+            nome = "Conta Administrador",
+            email = "admin@ufam.edu.br",
+            senha = "admin",
+            deficiente = false
+        ))
+        }
+    }
+
     private fun startHome() {
-        startActivity(Intent(requireContext(), HomeActivity::class.java))
-        requireActivity().finish()
+        val user  = userDao.buscarAdmin(1)
+        if (user != null) {
+            if (Preferences.getEmail(requireContext()) == user.email) {
+                startActivity(Intent(requireContext(), HomeAdminActivity::class.java))
+                requireActivity().finish()
+            } else {
+                startActivity(Intent(requireContext(), HomeActivity::class.java))
+                requireActivity().finish()
+            }
+        }
     }
 
     private fun verificarLogin(): Boolean {

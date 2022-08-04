@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
+import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLogin
 
-@Database(entities = [DadosLogin::class], version = 1)
+@Database(entities = [DadosLogin::class, DadosLocal::class], version = 2)
 abstract class AppDatabase : RoomDatabase(){
     abstract fun userDao(): DadosDao
     companion object {
@@ -15,7 +16,7 @@ abstract class AppDatabase : RoomDatabase(){
             return Room.databaseBuilder(
                 context,
                 AppDatabase::class.java,
-                "libras.db"
+                "sportgo.db"
             ).allowMainThreadQueries()
                 .build()
         }

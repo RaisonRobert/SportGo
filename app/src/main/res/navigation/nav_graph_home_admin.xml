@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_home_admin"
+    app:startDestination="@id/home_admin">
+
+    <fragment android:id="@+id/home_admin"
+        android:name="br.edu.ufam.pedro.sportgo.view.fragment.HomeAdminFragment"
+        android:label="Home Admin"
+        tools:layout="@layout/layout_home_admin_fragment"/>
+</navigation>
