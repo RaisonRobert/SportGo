@@ -2,6 +2,7 @@ package br.edu.ufam.pedro.sportgo.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -10,20 +11,23 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufam.pedro.sportgo.R
+import br.edu.ufam.pedro.sportgo.controller.adapter.RecyclerViewCadastro
 import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
+import br.edu.ufam.pedro.sportgo.controller.interfac.itemClickListenerCadastro
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
 import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
 import br.edu.ufam.pedro.sportgo.model.banco.Preferences
+import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import br.edu.ufam.pedro.sportgo.view.activity.LoginActivity
 import kotlinx.android.synthetic.main.dialog_apaga_conta.view.*
 
-class HomeAdminFragment : Fragment() {
+class HomeAdminFragment : Fragment(), itemClickListenerCadastro {
     private lateinit var userDao: DadosDao
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    private lateinit var viewManager: GridLayoutManager
+    private lateinit var recycler_lista: RecyclerView
+    private lateinit var adapterLista: RecyclerViewCadastro
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val db = AppDatabase.instancia(requireContext())
@@ -43,6 +47,31 @@ class HomeAdminFragment : Fragment() {
         adapterLista = RecyclerViewCadastro(this)
         setupRecyclerView(view)
         addDados()
+//        testeCadastrarLocal()
+    }
+
+//    private fun testeCadastrarLocal() {
+//        userDao.salvaLocal(DadosLocal(
+//            id = 1,
+//            foto = BancodeDados.foto,
+//            nomelocal = "SEJEL",
+//            horario = "08:00 até 22:00",
+//            linklocal = "https://goo.gl/maps/9aphYVFfA2uUv9t1A",
+//            esporte = "Futebol",
+//            descricao = "A SEJEL foi criada em 2002, tendo como objetivo o amparo ao desporto, a " +
+//                    "promoção, a difusão das atividades desportivas e a promoção do esporte amador."
+//        ))
+//    }
+
+    private fun addDados() {
+        val lista = userDao.buscarLocais().toMutableList()
+        Log.i("teste", "lista de locais: $lista")
+        adapterLista.popularLista(lista)
+    }
+    private fun setupRecyclerView(view: View) {
+        recycler_lista = view.findViewById(R.id.rv_menu_home)
+        recycler_lista.layoutManager = LinearLayoutManager(requireContext())
+        recycler_lista.adapter = adapterLista
     }
     /**
      * Método criado para setar os itens da Header
@@ -76,26 +105,7 @@ class HomeAdminFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun dialogApagaConta() {
-        val alertDialogExibir = AlertDialog.Builder(requireContext())
-        val inflater = layoutInflater
-        val view = inflater.inflate(R.layout.dialog_apaga_conta, null)
-        view.iconDialog.setImageResource(R.drawable.ic_fail)
-        view.titleDialog.text = getString(R.string.poxa)
-        view.subtitleDialog.text = getString(R.string.apaga_conta)
-        view.descriptionDialog.text = ""
-        alertDialogExibir.setView(view)
-        val dialog = alertDialogExibir.create()
-        dialog.show()
-        view.buttonCancela.setOnClickListener {
-            dialog.dismiss()
-        }
-        view.buttonOK.setOnClickListener {
-            dialog.dismiss()
-            userDao.delete(BancodeDados.dadosUser)
-            startLogin()
-        }
-    }
+
     private fun startLogin() {
         setPreferencesLogin("", "")
         startActivity(Intent(requireContext(), LoginActivity::class.java))
@@ -104,5 +114,9 @@ class HomeAdminFragment : Fragment() {
     private fun setPreferencesLogin(email: String, senha: String) {
         Preferences.setEmail(requireContext(), email)
         Preferences.setSenha(requireContext(), senha)
+    }
+
+    override fun itemClick(dado: DadosLocal, position: Int) {
+        Log.i("teste","Lista dados click: ${dado}")
     }
 }

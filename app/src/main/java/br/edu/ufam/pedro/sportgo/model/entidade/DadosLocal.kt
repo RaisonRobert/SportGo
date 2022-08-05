@@ -8,7 +8,7 @@ data class DadosLocal(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0L,
     val foto: String,
-    val titulo: String,
+    val nomelocal: String,
     val horario: String,
     val linklocal: String,
     val esporte: String,
