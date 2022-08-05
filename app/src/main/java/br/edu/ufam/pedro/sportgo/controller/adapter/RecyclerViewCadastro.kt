@@ -23,7 +23,7 @@ class RecyclerViewCadastro (var clickListener: HomeAdminFragment) :
         fun bindView(listAdapter: DadosLocal, action : itemClickListenerCadastro) {
             itemView.textViewNome.text = "Local: " + listAdapter.nomelocal.toString()
             itemView.txtDescLocal.text = listAdapter.descricao.toString()
-            itemView.textViewEsporte.text = listAdapter.esporte.toString()
+            itemView.textViewEsporte.text = "Esporte Praticado: "+listAdapter.esporte.toString()
             itemView.imageViewLocal.setImageBitmap(Ui.convertBase64ToBitmap(listAdapter.foto)
                 ?.let { reduzBitmap(it) })
             itemView.setOnClickListener{
