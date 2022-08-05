@@ -3,6 +3,7 @@ package br.edu.ufam.pedro.sportgo.controller.ui
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Environment
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,6 +12,7 @@ import br.edu.ufam.pedro.sportgo.R
 import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLogin
 import kotlinx.android.synthetic.main.dialog_modal.view.*
+import java.io.File
 
 object Ui {
     /**
@@ -93,4 +95,16 @@ object Ui {
         BancodeDados.arquivosDadosCadastrado = salvaDados.toMutableList()
     }
 
+    /**
+     * Método que cria a imagem de perfil do usuário
+     * @param context Contexto
+     */
+    fun createImageFile(context: Context): File {
+        val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "profilephoto", /* prefix */
+            ".jpg", /* suffix */
+            storageDir /* directory */
+        )
+    }
 }

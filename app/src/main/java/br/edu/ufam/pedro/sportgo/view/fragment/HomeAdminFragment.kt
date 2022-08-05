@@ -23,6 +23,7 @@ import br.edu.ufam.pedro.sportgo.model.banco.Preferences
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import br.edu.ufam.pedro.sportgo.view.activity.LoginActivity
 import kotlinx.android.synthetic.main.dialog_apaga_conta.view.*
+import kotlinx.android.synthetic.main.layout_home_admin_fragment.view.*
 
 class HomeAdminFragment : Fragment(), itemClickListenerCadastro {
     private lateinit var userDao: DadosDao
@@ -47,7 +48,14 @@ class HomeAdminFragment : Fragment(), itemClickListenerCadastro {
         adapterLista = RecyclerViewCadastro(this)
         setupRecyclerView(view)
         addDados()
+        botoes(view)
 //        testeCadastrarLocal()
+    }
+
+    private fun botoes(view: View) {
+        view.btnAdicionar.setOnClickListener{
+            findNavController().navigate(R.id.action_home_admin_to_cadastrar)
+        }
     }
 
 //    private fun testeCadastrarLocal() {

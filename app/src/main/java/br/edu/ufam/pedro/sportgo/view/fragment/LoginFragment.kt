@@ -122,19 +122,16 @@ class LoginFragment: Fragment() {
         senhaLayout.isErrorEnabled = true
 
         if (emailValid(email)) {
-//            Log.i("teste", "email: $email Senha: $senha")
             emailLayout.error = null
             setPreferencesLogin(email, senha)
             if (verificarLogin()) {
                 setPreferencesLogin(email, senha)
-
                 emailLayout.isErrorEnabled = false
                 senhaLayout.isErrorEnabled = false
                 return true
             } else
                 senhaLayout.error = getString(R.string.notValidLogin)
             emailLayout.error = getString(R.string.notValidLogin)
-
         } else {
             emailLayout.error = getString(R.string.notValidEmail)
         }

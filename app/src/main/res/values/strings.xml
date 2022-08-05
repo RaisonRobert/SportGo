@@ -39,4 +39,5 @@
     <string name="pergunta_interrogação">\?</string>
     <string name="ola_bem_vindo">Olá,\nBem Vindo </string>
     <string name="rank">Rank de Jogadores</string>
+    <string name="cadastrar_local">Cadastrar Local</string>
 </resources>

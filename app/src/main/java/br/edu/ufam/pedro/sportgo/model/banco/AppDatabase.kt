@@ -8,7 +8,7 @@ import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLogin
 
-@Database(entities = [DadosLogin::class, DadosLocal::class], version = 2)
+@Database(entities = [DadosLogin::class, DadosLocal::class], version = 1)
 abstract class AppDatabase : RoomDatabase(){
     abstract fun userDao(): DadosDao
     companion object {
