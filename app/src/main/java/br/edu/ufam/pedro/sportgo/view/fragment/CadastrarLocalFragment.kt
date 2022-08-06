@@ -73,7 +73,6 @@ class CadastrarLocalFragment : Fragment() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 //        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(requireActivity().packageManager) != null) {
-
 //            try {
                 photoFile = Ui.createImageFile(requireContext())
 //                if (photoFile != null) {
