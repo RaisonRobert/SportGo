@@ -49,7 +49,7 @@ class HomeAdminFragment : Fragment(), itemClickListenerCadastro {
         setupRecyclerView(view)
         addDados()
         botoes(view)
-//        testeCadastrarLocal()
+
     }
 
     private fun botoes(view: View) {
@@ -58,18 +58,7 @@ class HomeAdminFragment : Fragment(), itemClickListenerCadastro {
         }
     }
 
-//    private fun testeCadastrarLocal() {
-//        userDao.salvaLocal(DadosLocal(
-//            id = 1,
-//            foto = BancodeDados.foto,
-//            nomelocal = "SEJEL",
-//            horario = "08:00 até 22:00",
-//            linklocal = "https://goo.gl/maps/9aphYVFfA2uUv9t1A",
-//            esporte = "Futebol",
-//            descricao = "A SEJEL foi criada em 2002, tendo como objetivo o amparo ao desporto, a " +
-//                    "promoção, a difusão das atividades desportivas e a promoção do esporte amador."
-//        ))
-//    }
+
 
     private fun addDados() {
         val lista = userDao.buscarLocais().toMutableList()

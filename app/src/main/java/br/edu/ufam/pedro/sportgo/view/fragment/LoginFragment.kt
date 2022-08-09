@@ -44,7 +44,6 @@ class LoginFragment: Fragment() {
         loading = Ui.createLoadDialog(requireContext(), false)
         Ui.atualizaLista(userDao.buscarDados())
 //        setPreferencesLogin("", "")
-        criaAdmin()
             Log.i("teste", "email: ${Preferences.getEmail(requireContext())}")
             Log.i("teste", "senha: ${Preferences.getSenha(requireContext())}")
 //        Log.i("teste", "banco de dados lista: ${BancodeDados.arquivosDadosCadastrado}")
@@ -56,17 +55,7 @@ class LoginFragment: Fragment() {
         botoes(view)
     }
 
-    private fun criaAdmin() {
-        if(userDao.buscarDados().isEmpty()){
-        userDao.salvaDados(DadosLogin(
-            id = 1,
-            nome = "Conta Administrador",
-            email = "admin@ufam.edu.br",
-            senha = "admin",
-            deficiente = false
-        ))
-        }
-    }
+
 
     private fun startHome() {
         val user  = userDao.buscarAdmin(1)

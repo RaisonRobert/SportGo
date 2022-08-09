@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -17,6 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.FileProvider
@@ -26,12 +28,15 @@ import br.edu.ufam.pedro.sportgo.R
 import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
 import br.edu.ufam.pedro.sportgo.controller.ui.Ui
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
+import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
+import kotlinx.android.synthetic.main.layout_fragment_cadastrar_local.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
 import java.util.*
 
+@Suppress("DEPRECATION")
 class CadastrarLocalFragment : Fragment() {
     private lateinit var userDao: DadosDao
     private val REQUEST_IMAGE_CAPTURE = 1
@@ -58,12 +63,33 @@ class CadastrarLocalFragment : Fragment() {
     }
 
     private fun botoes(view: View) {
-        this.profile_photo.setOnClickListener{
-            Log.i("teste", "clicou na foto")
-            this.dispatchTakePictureIntent()
+        profile_photo.setOnClickListener{
+            dispatchTakePictureIntent()
+        }
+        btnCadastrar.setOnClickListener {
+//            montarBody()
+                userDao.salvaLocal(montarBody())
         }
     }
 
+
+    private fun montarBody(): DadosLocal {
+        var foto: String? = null
+        photo?.let {
+            Ui.convertToBase64(photo!!)?.let {
+                foto = it
+            }
+        }
+        val cadastro = DadosLocal(
+            foto = foto,
+            nomelocal = nomefieldLocal.text.toString(),
+            horario = nomefieldHorario.text.toString(),
+            linklocal = nomefieldLinkMaps.text.toString(),
+            esporte = nomefieldDesc.text.toString(),
+            descricao = nomefieldEsporte.text.toString()
+        )
+        return cadastro
+    }
 
     /**
      * Método criado para realizar a foto de perfil do usuário
@@ -71,25 +97,23 @@ class CadastrarLocalFragment : Fragment() {
     @Suppress("DEPRECATION")
     private fun dispatchTakePictureIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(requireActivity().packageManager) != null) {
-//            try {
+            try {
                 photoFile = Ui.createImageFile(requireContext())
-//                if (photoFile != null) {
-                    val photoURI = FileProvider.getUriForFile(
-                        requireContext(),
-                        "br.edu.ufam.pedro.sportgo",
-                        photoFile
-                    )
-                    takePictureIntent.putExtra(
-                        MediaStore.EXTRA_OUTPUT,
-                        photoURI
-                    )
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-//                }
-//            } catch (ex: Exception) {
-//                ex.printStackTrace()
-//            }
+                val photoURI = FileProvider.getUriForFile(
+                    requireContext(),
+                    "br.edu.ufam.pedro.sportgo",
+                    photoFile
+                )
+                takePictureIntent.putExtra(
+                    MediaStore.EXTRA_OUTPUT,
+                    photoURI
+                )
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
         }
     }
 
@@ -103,12 +127,12 @@ class CadastrarLocalFragment : Fragment() {
     @Suppress("DEPRECATION")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+        if ((requestCode == REQUEST_IMAGE_CAPTURE) && (resultCode == Activity.RESULT_OK)) {
             val uri = Uri.fromFile(photoFile)
             photo = carrega(uri)
-            profile_photo.setImageBitmap(photo)
-//            val loadingModal = Ui.createLoadDialog(requireContext(), true)
-//            loadingModal.dismiss()
+            photo?.let {
+                profile_photo.setImageBitmap(photo)
+            }
         }
     }
 
@@ -181,7 +205,7 @@ class CadastrarLocalFragment : Fragment() {
     private fun reduzBitmap(bmpFotoRotation: Bitmap): Bitmap? {
         return Bitmap.createScaledBitmap(
             bmpFotoRotation,
-            440, 680, true
+            300, 300, true
         )
     }
 
@@ -198,4 +222,5 @@ class CadastrarLocalFragment : Fragment() {
             findNavController().popBackStack(R.id.home_admin, false)
         }
     }
+
 }

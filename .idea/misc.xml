@@ -26,6 +26,7 @@
         <entry key="app/src/main/res/menu/menu_cadastra.xml" value="0.18981481481481483" />
         <entry key="app/src/main/res/menu/menu_home.xml" value="0.18981481481481483" />
         <entry key="app/src/main/res/menu/menu_home_admin.xml" value="0.18981481481481483" />
+        <entry key="app/src/main/res/xml/provider_paths.xml" value="0.1" />
       </map>
     </option>
   </component>

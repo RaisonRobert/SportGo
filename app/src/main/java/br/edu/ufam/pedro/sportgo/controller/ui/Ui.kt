@@ -3,16 +3,22 @@ package br.edu.ufam.pedro.sportgo.controller.ui
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Environment
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import br.edu.ufam.pedro.sportgo.R
 import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLogin
 import kotlinx.android.synthetic.main.dialog_modal.view.*
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Ui {
     /**
@@ -73,7 +79,17 @@ object Ui {
         }
         return mAlertDialog
     }
-
+    /**
+     * Método que converte um bitmap para uma string de Base64
+     * @param imagem Bitmap
+     */
+    fun convertToBase64(imagem: Bitmap): String? {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        imagem.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        val imageBytes: ByteArray = byteArrayOutputStream.toByteArray()
+        val imageString: String = android.util.Base64.encodeToString(imageBytes, android.util.Base64.DEFAULT)
+        return imageString
+    }
     /**
      * Método que converte a string Base64 em um bitmap
      * @param base64 String a ser convertida
@@ -99,12 +115,22 @@ object Ui {
      * Método que cria a imagem de perfil do usuário
      * @param context Contexto
      */
+//    lateinit var currentPhotoPath: String
     fun createImageFile(context: Context): File {
+//        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(
-            "profilephoto", /* prefix */
+            "JPEG_LOCAL", /* prefix */
             ".jpg", /* suffix */
             storageDir /* directory */
         )
+//            .apply {
+//            // Save a file: path for use with ACTION_VIEW intents
+//            currentPhotoPath = absolutePath
+//        }
     }
+
+
+
+
 }
