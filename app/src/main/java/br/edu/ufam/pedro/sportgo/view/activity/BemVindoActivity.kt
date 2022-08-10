@@ -1,4 +1,4 @@
-package br.edu.ufam.pedro.sportgo.view
+package br.edu.ufam.pedro.sportgo.view.activity
 
 
 import android.Manifest
@@ -12,10 +12,7 @@ import androidx.core.app.ActivityCompat
 import br.edu.ufam.pedro.sportgo.R
 import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
-import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
-import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLogin
-import br.edu.ufam.pedro.sportgo.view.activity.LoginActivity
 
 class BemVindoActivity : AppCompatActivity() {
     val PERMISSION_REQUEST_COARSE_LOCATION = 1
@@ -50,7 +47,9 @@ class BemVindoActivity : AppCompatActivity() {
             arrayOf(
                 Manifest.permission.FOREGROUND_SERVICE,
                 Manifest.permission.CAMERA,
-                Manifest.permission.RECORD_AUDIO
+                Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
             ),
             PERMISSION_REQUEST_COARSE_LOCATION
         )

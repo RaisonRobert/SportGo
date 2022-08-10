@@ -59,15 +59,16 @@ class CadastrarLocalFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHeader(view)
-        botoes(view)
+        botoes()
     }
 
-    private fun botoes(view: View) {
+    private fun botoes() {
         profile_photo.setOnClickListener{
             dispatchTakePictureIntent()
         }
         btnCadastrar.setOnClickListener {
-//            montarBody()
+           val local =  montarBody()
+            Log.i("teste", "$local")
                 userDao.salvaLocal(montarBody())
         }
     }
@@ -76,8 +77,10 @@ class CadastrarLocalFragment : Fragment() {
     private fun montarBody(): DadosLocal {
         var foto: String? = null
         photo?.let {
-            Ui.convertToBase64(photo!!)?.let {
-                foto = it
+            reduzBitmap(photo!!)?.let { it1 ->
+                Ui.convertToBase64(it1)?.let {
+                    foto = it
+                }
             }
         }
         val cadastro = DadosLocal(
@@ -205,7 +208,7 @@ class CadastrarLocalFragment : Fragment() {
     private fun reduzBitmap(bmpFotoRotation: Bitmap): Bitmap? {
         return Bitmap.createScaledBitmap(
             bmpFotoRotation,
-            300, 300, true
+            250, 300, true
         )
     }
 

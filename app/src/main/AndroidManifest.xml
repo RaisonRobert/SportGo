@@ -27,7 +27,7 @@
             android:name=".view.activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".view.BemVindoActivity"
+            android:name=".view.activity.BemVindoActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.MainActivity"
