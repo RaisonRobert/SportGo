@@ -1,5 +1,6 @@
 package br.edu.ufam.pedro.sportgo.model.banco
 
+import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLogin
 
 
@@ -41,6 +42,17 @@ object BancodeDados {
 //                senha = "123",
 //                pontos = 10
 //            ))
+    var dadosLocal = (
+            DadosLocal(
+                id = 0L,
+                foto = null,
+                nomelocal = null,
+                horario = null,
+                linklocal = null,
+                esporte = null,
+                descricao = null
+            )
+            )
     var dadosUser = (
             DadosLogin(
                 nome = "",

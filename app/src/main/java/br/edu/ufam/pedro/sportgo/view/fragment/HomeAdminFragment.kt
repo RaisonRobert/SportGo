@@ -115,5 +115,8 @@ class HomeAdminFragment : Fragment(), itemClickListenerCadastro {
 
     override fun itemClick(dado: DadosLocal, position: Int) {
         Log.i("teste","Lista dados click: ${dado}")
+        BancodeDados.dadosLocal = dado
+        Log.i("teste","Lista dados click: ${BancodeDados.dadosLocal}")
+        findNavController().navigate(R.id.action_home_admin_to_visualiza_cadastro)
     }
 }

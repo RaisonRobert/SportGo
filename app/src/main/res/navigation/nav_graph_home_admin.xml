@@ -16,9 +16,21 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_home_admin_to_visualiza_cadastro"
+            app:destination="@id/visualiza_cadastro"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            />
     </fragment>
     <fragment android:id="@+id/cadastrar"
         android:name="br.edu.ufam.pedro.sportgo.view.fragment.CadastrarLocalFragment"
         android:label="Cadastrar Local"
         tools:layout="@layout/layout_fragment_cadastrar_local"/>
+    <fragment android:id="@+id/visualiza_cadastro"
+        android:name="br.edu.ufam.pedro.sportgo.view.fragment.VisualizarLocalFragment"
+        android:label="Visualizar Cadastro"
+        tools:layout="@layout/layout_visualiza_admin_fragment" />
 </navigation>

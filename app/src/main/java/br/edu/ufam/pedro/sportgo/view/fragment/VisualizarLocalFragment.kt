@@ -9,16 +9,15 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.FileProvider
@@ -28,17 +27,20 @@ import br.edu.ufam.pedro.sportgo.R
 import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
 import br.edu.ufam.pedro.sportgo.controller.ui.Ui
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
+import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
-import kotlinx.android.synthetic.main.layout_fragment_cadastrar_local.*
+import kotlinx.android.synthetic.main.dialog_apaga_conta.view.*
+import kotlinx.android.synthetic.main.layout_visualiza_admin_fragment.*
+import kotlinx.android.synthetic.main.layout_visualiza_admin_fragment.view.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
 import java.util.*
 
-@Suppress("DEPRECATION")
-class CadastrarLocalFragment : Fragment() {
+class VisualizarLocalFragment : Fragment() {
     private lateinit var userDao: DadosDao
+    private val NAO_POSSUI = "Não Possui Dados Cadastrado"
     private val REQUEST_IMAGE_CAPTURE = 1
     private lateinit var profile_photo: ImageView
     private var photo: Bitmap? = null
@@ -53,27 +55,26 @@ class CadastrarLocalFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.layout_fragment_cadastrar_local, container, false)
+        return inflater.inflate(R.layout.layout_visualiza_admin_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHeader(view)
-        botoes()
+        setDadosVisualizar(view)
+        botoesAlterar()
     }
 
-    private fun botoes() {
-        profile_photo.setOnClickListener{
-            dispatchTakePictureIntent()
-        }
-        btnCadastrar.setOnClickListener {
-//            val local =  montarBody()
-//            Log.i("teste", "$local")
-            userDao.salvaLocal(montarBody())
+    private fun botoesAlterar() {
+            imageButtonTirarFotoVisualizar.setOnClickListener {
+                dispatchTakePictureIntent()            }
+        btnAlterar.setOnClickListener {
+            BancodeDados.dadosLocal = montarBody()
+            Log.i("teste","dado update: ${BancodeDados.dadosLocal}")
+            userDao.alterarDadosLocal(BancodeDados.dadosLocal)
             findNavController().popBackStack(R.id.home_admin, false)
         }
     }
-
 
     private fun montarBody(): DadosLocal {
         var foto: String? = null
@@ -85,12 +86,14 @@ class CadastrarLocalFragment : Fragment() {
             }
         }
         val cadastro = DadosLocal(
+            id = BancodeDados.dadosLocal.id,
             foto = foto,
-            nomelocal = nomefieldLocal.text.toString(),
-            horario = nomefieldHorario.text.toString(),
-            linklocal = nomefieldLinkMaps.text.toString(),
-            esporte = nomefieldDesc.text.toString(),
-            descricao = nomefieldEsporte.text.toString()
+            nomelocal = nomefieldLocalVisualizar.text.toString(),
+            horario = nomefieldHorarioVisualizar.text.toString(),
+            linklocal = nomefieldLinkMapsVisualizar.text.toString(),
+            esporte = nomefieldEsporteVisualizar.text.toString(),
+            descricao = nomefieldDescVisualizar.text.toString()
+
         )
         return cadastro
     }
@@ -213,18 +216,133 @@ class CadastrarLocalFragment : Fragment() {
         )
     }
 
+    private fun setDadosVisualizar(view: View) {
+        btnAlterar.visibility = View.GONE
+        val foto = Ui.convertBase64ToBitmap(BancodeDados.dadosLocal.foto.toString())
+        foto?.let {
+            view.imageButtonTirarFotoVisualizar.setImageBitmap(it)
+        }
+        BancodeDados.dadosLocal.nomelocal?.let {
+            if (it.isNotEmpty()) {
+                view.nomefieldLocalVisualizar.setText(it)
+            } else
+                view.nomefieldLocalVisualizar.setText(NAO_POSSUI)
+            view.nomefieldLocalVisualizar.isEnabled = false
+        }
+        BancodeDados.dadosLocal.horario?.let {
+            if (it.isNotEmpty()) {
+                view.nomefieldHorarioVisualizar.setText(it)
+            } else
+                view.nomefieldHorarioVisualizar.setText(NAO_POSSUI)
+            view.nomefieldHorarioVisualizar.isEnabled = false
+        }
+        BancodeDados.dadosLocal.linklocal?.let {
+            if (it.isNotEmpty()) {
+                view.nomefieldLinkMapsVisualizar.setText(it)
+            } else
+                view.nomefieldLinkMapsVisualizar.setText(NAO_POSSUI)
+            view.nomefieldLinkMapsVisualizar.isEnabled = false
+        }
+        BancodeDados.dadosLocal.esporte?.let {
+            if (it.isNotEmpty()) {
+                view.nomefieldEsporteVisualizar.setText(it)
+            } else
+                view.nomefieldEsporteVisualizar.setText(NAO_POSSUI)
+            view.nomefieldEsporteVisualizar.isEnabled = false
+        }
+        BancodeDados.dadosLocal.descricao?.let {
+            if (it.isNotEmpty()) {
+                view.nomefieldDescVisualizar.setText(it)
+            } else
+                view.nomefieldDescVisualizar.setText(NAO_POSSUI)
+            view.nomefieldDescVisualizar.isEnabled = false
+        }
+
+    }
+
+    @Suppress("DEPRECATION")
     private fun setHeader(view: View) {
-        this.profile_photo = view.findViewById(R.id.imageButtonTirarFoto) as ImageView
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        this.profile_photo = view.findViewById(R.id.imageButtonTirarFotoVisualizar) as ImageView
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)
         toolbar.title = ""
+        setHasOptionsMenu(true)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         val headerLayout = view.findViewById<View>(R.id.headerView)
         val titlePage = headerLayout.findViewById<TextView>(R.id.title)
-        titlePage.setText(getString(R.string.cadastrar_local))
+        titlePage.setText("Visualizar Cadastro")
         toolbar.setNavigationOnClickListener {
             findNavController().popBackStack(R.id.home_admin, false)
         }
     }
+
+    @Suppress("DEPRECATION")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_cadastra, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menuAlterarDados -> {
+                ativarCampos()
+            }
+            R.id.menuApagarConta -> {
+                dialogApagaConta()
+            }
+
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    private fun dialogApagaConta() {
+        val alertDialogExibir = AlertDialog.Builder(requireContext())
+        val inflater = layoutInflater
+        val view = inflater.inflate(R.layout.dialog_apaga_conta, null)
+        view.iconDialog.setImageResource(R.drawable.ic_fail)
+        view.titleDialog.text = "Excluir Local!"
+        view.subtitleDialog.text = "Você tem certeza que deseja excluir este local?"
+        view.descriptionDialog.text = ""
+        alertDialogExibir.setView(view)
+        val dialog = alertDialogExibir.create()
+        dialog.show()
+        view.buttonCancela.setOnClickListener {
+            dialog.dismiss()
+        }
+        view.buttonOK.setOnClickListener {
+            dialog.dismiss()
+//            Log.i("teste", "dados estatico: ${BancodeDados.dadosUser}")
+            userDao.deleteLocal(BancodeDados.dadosLocal)
+//            Log.i("teste", "banco de dados: ${userDao.buscarDados()}")
+//            Ui.atualizaLista(userDao.buscarDados())
+//                BancodeDados.arquivosDadosCadastrado.remove(BancodeDados.dadosUser)
+            findNavController().popBackStack(R.id.home_admin, false)
+        }
+    }
+    private fun ativarCampos() {
+        nomefieldLocalVisualizar.isEnabled = true
+        nomefieldHorarioVisualizar.isEnabled = true
+        nomefieldLinkMapsVisualizar.isEnabled = true
+        nomefieldEsporteVisualizar.isEnabled = true
+        nomefieldDescVisualizar.isEnabled = true
+        if (nomefieldLocalVisualizar.text.toString() == NAO_POSSUI) {
+            nomefieldLocalVisualizar.setText("")
+        }
+        if (nomefieldHorarioVisualizar.text.toString() == NAO_POSSUI) {
+            nomefieldHorarioVisualizar.setText("")
+        }
+        if (nomefieldLinkMapsVisualizar.text.toString() == NAO_POSSUI) {
+            nomefieldLinkMapsVisualizar.setText("")
+        }
+        if (nomefieldEsporteVisualizar.text.toString() == NAO_POSSUI) {
+            nomefieldEsporteVisualizar.setText("")
+        }
+        if (nomefieldDescVisualizar.text.toString() == NAO_POSSUI) {
+            nomefieldDescVisualizar.setText("")
+        }
+        btnAlterar.visibility = View.VISIBLE
+    }
+
 
 }

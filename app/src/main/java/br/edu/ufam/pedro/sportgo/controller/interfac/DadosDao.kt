@@ -30,4 +30,10 @@ interface DadosDao{
     @Insert
     fun salvaLocal(vararg dadosLocal : DadosLocal)
 
+    @Delete
+    fun deleteLocal(vararg dadosLocal: DadosLocal)
+
+    @Update
+    fun alterarDadosLocal(dadosLocal: DadosLocal)
+
 }
