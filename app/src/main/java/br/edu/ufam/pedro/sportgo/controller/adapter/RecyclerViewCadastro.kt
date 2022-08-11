@@ -24,9 +24,10 @@ class RecyclerViewCadastro (var clickListener: HomeAdminFragment) :
             itemView.textViewNome.text = "Local: " + listAdapter.nomelocal.toString()
             itemView.txtDescLocal.text = listAdapter.descricao.toString()
             itemView.textViewEsporte.text = "Esporte Praticado: "+listAdapter.esporte.toString()
-            if(!listAdapter.foto.isNullOrEmpty()){
+            listAdapter.foto?.let {
                 itemView.imageViewLocal.setImageBitmap(Ui.convertBase64ToBitmap(listAdapter.foto)?.let { reduzBitmap(it) })
             }
+
             itemView.setOnClickListener{
                 action.itemClick(listAdapter, adapterPosition)
             }
@@ -34,7 +35,7 @@ class RecyclerViewCadastro (var clickListener: HomeAdminFragment) :
         private fun reduzBitmap(bmpFotoRotation: Bitmap): Bitmap? {
             return Bitmap.createScaledBitmap(
                 bmpFotoRotation,
-                300, 250
+                250, 300
                 , true
             )
         }

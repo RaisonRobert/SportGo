@@ -83,9 +83,12 @@ object Ui {
      * Método que converte um bitmap para uma string de Base64
      * @param imagem Bitmap
      */
-    fun convertToBase64(imagem: Bitmap): String? {
+    fun convertToBase64(imagem: Bitmap?): String? {
         val byteArrayOutputStream = ByteArrayOutputStream()
-        imagem.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        imagem?.let {
+            imagem.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        }
+
         val imageBytes: ByteArray = byteArrayOutputStream.toByteArray()
         val imageString: String = android.util.Base64.encodeToString(imageBytes, android.util.Base64.DEFAULT)
         return imageString
@@ -110,7 +113,7 @@ object Ui {
      * Método que converte a string Base64 em um bitmap
      * @param base64 String a ser convertida
      */
-    fun convertBase64ToBitmap(base64: String): Bitmap? {
+    fun convertBase64ToBitmap(base64: String?): Bitmap? {
         val data = android.util.Base64.decode(base64, android.util.Base64.DEFAULT)
         return BitmapFactory.decodeByteArray(data, 0, data.size)
     }

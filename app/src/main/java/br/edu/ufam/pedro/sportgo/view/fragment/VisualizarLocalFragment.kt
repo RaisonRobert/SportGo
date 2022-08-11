@@ -77,14 +77,11 @@ class VisualizarLocalFragment : Fragment() {
     }
 
     private fun montarBody(): DadosLocal {
-        var foto: String? = null
+        var foto: String? = BancodeDados.dadosLocal.foto
         photo?.let {
-            reduzBitmap(photo!!)?.let { it1 ->
-                Ui.convertToBase64(it1)?.let {
-                    foto = it
-                }
-            }
+            foto = Ui.convertToBase64(reduzBitmap(it))
         }
+
         val cadastro = DadosLocal(
             id = BancodeDados.dadosLocal.id,
             foto = foto,
@@ -138,7 +135,7 @@ class VisualizarLocalFragment : Fragment() {
             val uri = Uri.fromFile(photoFile)
             photo = carrega(uri)
             photo?.let {
-                profile_photo.setImageBitmap(photo)
+                profile_photo.setImageBitmap(it)
             }
         }
     }

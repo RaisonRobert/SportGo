@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class DadosLocal(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0L,
-    val foto: String?,
+    var foto: String?,
     val nomelocal: String?,
     val horario: String?,
     val linklocal: String?,
