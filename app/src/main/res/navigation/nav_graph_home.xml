@@ -29,7 +29,32 @@
         android:label="Alterar Dados"
         tools:layout="@layout/layout_fragment_alterar_dados"/>
     <fragment android:id="@+id/lista_de_esporte_selecionado"
-        android:name="br.edu.ufam.pedro.sportgo.view.fragment.ListaEsporteSelecionado"
+        android:name="br.edu.ufam.pedro.sportgo.view.fragment.ListaEsporteSelecionadoFragment"
         android:label="Lista de Locais de Esporte"
-        tools:layout="@layout/layout_lista_esporte"/>
+        tools:layout="@layout/layout_lista_esporte">
+        <action
+            android:id="@+id/action_lista_de_esporte_selecionado_to_detalhes_local"
+            app:destination="@id/detalhes_local"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+    <fragment android:id="@+id/detalhes_local"
+        android:name="br.edu.ufam.pedro.sportgo.view.fragment.VisualizarDadosMapLocalFragment"
+        android:label="Detalhes Local"
+        tools:layout="@layout/layout_visualiza_dados_fragment"
+        >
+        <action
+            android:id="@+id/action_detalhes_local_to_web_view"
+            app:destination="@id/web_view"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+    <fragment android:id="@+id/web_view"
+        android:name="br.edu.ufam.pedro.sportgo.view.fragment.WebViewFragment"
+        android:label="Web View"
+        tools:layout="@layout/layout_webview_fragment"/>
 </navigation>

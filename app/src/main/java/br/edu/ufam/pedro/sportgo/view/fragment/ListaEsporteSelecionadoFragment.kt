@@ -18,11 +18,12 @@ import br.edu.ufam.pedro.sportgo.controller.adapter.RecyclerViewListaEsporte
 import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
 import br.edu.ufam.pedro.sportgo.controller.interfac.itemClickListenerCadastro
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
+import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
 import br.edu.ufam.pedro.sportgo.model.banco.Preferences
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import kotlinx.android.synthetic.main.layout_lista_esporte.view.*
 
-class ListaEsporteSelecionado: Fragment(), itemClickListenerCadastro{
+class ListaEsporteSelecionadoFragment: Fragment(), itemClickListenerCadastro{
     private lateinit var userDao: DadosDao
     private lateinit var recycler_lista: RecyclerView
     private lateinit var adapterLista: RecyclerViewListaEsporte
@@ -76,5 +77,7 @@ class ListaEsporteSelecionado: Fragment(), itemClickListenerCadastro{
 
     override fun itemClick(dado: DadosLocal, position: Int) {
         Log.i("teste","Lista Esporte click: ${dado}")
+        BancodeDados.dadosLocal = dado
+        findNavController().navigate(R.id.action_lista_de_esporte_selecionado_to_detalhes_local)
     }
 }

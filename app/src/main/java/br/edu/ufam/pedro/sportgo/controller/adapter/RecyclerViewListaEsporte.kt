@@ -11,10 +11,10 @@ import br.edu.ufam.pedro.sportgo.R
 import br.edu.ufam.pedro.sportgo.controller.interfac.itemClickListenerCadastro
 import br.edu.ufam.pedro.sportgo.controller.ui.Ui
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
-import br.edu.ufam.pedro.sportgo.view.fragment.ListaEsporteSelecionado
+import br.edu.ufam.pedro.sportgo.view.fragment.ListaEsporteSelecionadoFragment
 import kotlinx.android.synthetic.main.item_lista_cadastro.view.*
 
-class RecyclerViewListaEsporte (var clickListener: ListaEsporteSelecionado) : RecyclerView.Adapter<RecyclerViewListaEsporte.ViewHolder>()  {
+class RecyclerViewListaEsporte (var clickListener: ListaEsporteSelecionadoFragment) : RecyclerView.Adapter<RecyclerViewListaEsporte.ViewHolder>()  {
     private var listar: MutableList<DadosLocal> = mutableListOf()
     var itemListener: itemClickListenerCadastro? = null
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
