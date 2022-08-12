@@ -1,6 +1,7 @@
 package br.edu.ufam.pedro.sportgo.controller.interfac
 
 import androidx.room.*
+import br.edu.ufam.pedro.sportgo.controller.adapter.RecyclerViewListaEsporte
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLogin
 
@@ -36,4 +37,6 @@ interface DadosDao{
     @Update
     fun alterarDadosLocal(dadosLocal: DadosLocal)
 
+    @Query("SELECT * FROM DadosLocal WHERE esporte = :esporte")
+    fun buscarListaEsporte(esporte: String): List<DadosLocal>
 }

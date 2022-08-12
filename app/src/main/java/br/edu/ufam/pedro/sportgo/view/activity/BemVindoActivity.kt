@@ -41,7 +41,6 @@ class BemVindoActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-
         }
         timer.start()
         ActivityCompat.requestPermissions(
@@ -98,6 +97,90 @@ class BemVindoActivity : AppCompatActivity() {
                     id = 1,
                     foto = BancodeDados.foto,
                     nomelocal = "SEJEL",
+                    horario = "08:00 até 22:00",
+                    linklocal = "https://goo.gl/maps/9aphYVFfA2uUv9t1A",
+                    esporte = "Futebol",
+                    descricao = "A SEJEL foi criada em 2002, tendo como objetivo o amparo ao desporto, a " +
+                            "promoção, a difusão das atividades desportivas e a promoção do esporte amador."
+                )
+            )
+            userDao.salvaLocal(
+                DadosLocal(
+                    id = 2,
+                    foto = BancodeDados.foto,
+                    nomelocal = "SEJEL",
+                    horario = "08:00 até 22:00",
+                    linklocal = "https://goo.gl/maps/9aphYVFfA2uUv9t1A",
+                    esporte = "Futebol Americano",
+                    descricao = "A SEJEL foi criada em 2002, tendo como objetivo o amparo ao desporto, a " +
+                            "promoção, a difusão das atividades desportivas e a promoção do esporte amador."
+                )
+            )
+            userDao.salvaLocal(
+                DadosLocal(
+                    id = 3,
+                    foto = BancodeDados.foto,
+                    nomelocal = "SEJEL",
+                    horario = "08:00 até 22:00",
+                    linklocal = "https://goo.gl/maps/9aphYVFfA2uUv9t1A",
+                    esporte = "Basketball",
+                    descricao = "A SEJEL foi criada em 2002, tendo como objetivo o amparo ao desporto, a " +
+                            "promoção, a difusão das atividades desportivas e a promoção do esporte amador."
+                )
+            )
+            userDao.salvaLocal(
+                DadosLocal(
+                    id = 4,
+                    foto = BancodeDados.foto,
+                    nomelocal = "SEJEL",
+                    horario = "08:00 até 22:00",
+                    linklocal = "https://goo.gl/maps/9aphYVFfA2uUv9t1A",
+                    esporte = "Voleyball",
+                    descricao = "A SEJEL foi criada em 2002, tendo como objetivo o amparo ao desporto, a " +
+                            "promoção, a difusão das atividades desportivas e a promoção do esporte amador."
+                )
+            )
+            userDao.salvaLocal(
+                DadosLocal(
+                    id = 5,
+                    foto = BancodeDados.foto,
+                    nomelocal = "SEJEL",
+                    horario = "08:00 até 22:00",
+                    linklocal = "https://goo.gl/maps/9aphYVFfA2uUv9t1A",
+                    esporte = "Tennis",
+                    descricao = "A SEJEL foi criada em 2002, tendo como objetivo o amparo ao desporto, a " +
+                            "promoção, a difusão das atividades desportivas e a promoção do esporte amador."
+                )
+            )
+            userDao.salvaLocal(
+                DadosLocal(
+                    id = 6,
+                    foto = BancodeDados.foto,
+                    nomelocal = "SEJEL",
+                    horario = "08:00 até 22:00",
+                    linklocal = "https://goo.gl/maps/9aphYVFfA2uUv9t1A",
+                    esporte = "Ping Pong",
+                    descricao = "A SEJEL foi criada em 2002, tendo como objetivo o amparo ao desporto, a " +
+                            "promoção, a difusão das atividades desportivas e a promoção do esporte amador."
+                )
+            )
+            userDao.salvaLocal(
+                DadosLocal(
+                    id = 7,
+                    foto = BancodeDados.foto,
+                    nomelocal = "UFAM",
+                    horario = "08:00 até 22:00",
+                    linklocal = "https://goo.gl/maps/9aphYVFfA2uUv9t1A",
+                    esporte = "Futebol",
+                    descricao = "A SEJEL foi criada em 2002, tendo como objetivo o amparo ao desporto, a " +
+                            "promoção, a difusão das atividades desportivas e a promoção do esporte amador."
+                )
+            )
+            userDao.salvaLocal(
+                DadosLocal(
+                    id = 8,
+                    foto = BancodeDados.foto,
+                    nomelocal = "IFAM",
                     horario = "08:00 até 22:00",
                     linklocal = "https://goo.gl/maps/9aphYVFfA2uUv9t1A",
                     esporte = "Futebol",
