@@ -114,8 +114,9 @@
                 android:id="@+id/nomefieldDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_sports"             android:drawablePadding="12dp"
-                android:inputType="textPersonName" />
+                android:drawableStart="@drawable/ic_sports"
+                android:drawablePadding="12dp"
+                android:inputType ="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

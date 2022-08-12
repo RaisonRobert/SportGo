@@ -10,7 +10,9 @@ object Preferences {
     private var preferencesEmail: String? = null
     private const val preferenceEMAIL = "email"
     private var preferencesSenha: String? = null
+    private var preferencesEsporte: String? = null
     private const val preferenceSENHA = "senha"
+    private const val preferenceESPORTE = "esporte"
     /**
      * Método para criar preferências compartilhadas na memória interna do device
      * @param context Contexto
@@ -36,6 +38,10 @@ object Preferences {
         preferences(context).edit().putString(preferenceSENHA, login).apply()
         preferencesSenha = login
     }
+    fun setEsporte(context: Context, esporte: String) {
+        preferences(context).edit().putString(preferenceESPORTE, esporte).apply()
+        preferencesEsporte = esporte
+    }
     /**
      * Método para retornar token do usuário na memória do device
      * @param context Contexto
@@ -57,6 +63,15 @@ object Preferences {
             return senha
         } else{
             return preferencesSenha
+        }
+    }
+    fun getEsporte(context: Context): String? {
+        if(preferencesEsporte.isNullOrBlank()){
+            val esporte = preferences(context)
+                .getString(preferenceESPORTE, null)
+            return esporte
+        } else{
+            return preferencesEsporte
         }
     }
 }

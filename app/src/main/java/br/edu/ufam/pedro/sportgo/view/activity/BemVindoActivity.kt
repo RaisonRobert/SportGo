@@ -12,6 +12,8 @@ import androidx.core.app.ActivityCompat
 import br.edu.ufam.pedro.sportgo.R
 import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
+import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
+import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLogin
 
 class BemVindoActivity : AppCompatActivity() {
@@ -25,11 +27,11 @@ class BemVindoActivity : AppCompatActivity() {
         userDao = db.userDao()
         time()
         criaAdmin()
-//        testeCadastrarLocal()
+        testeCadastrarLocal()
     }
     private fun time() {
         val intent = Intent(this, LoginActivity::class.java)
-        val timer = object : CountDownTimer(5000, 1000) {
+        val timer = object : CountDownTimer(6000, 1000) {
             @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
             }
@@ -76,21 +78,33 @@ class BemVindoActivity : AppCompatActivity() {
                 email = "admin@ufam.edu.br",
                 senha = "admin",
                 deficiente = false
+                )
             )
+            userDao.salvaDados(
+                DadosLogin(
+                    id = 2,
+                    nome = "Raison",
+                    email = "raison@ufam.edu.br",
+                    senha = "123",
+                    deficiente = true
+                )
             )
         }
     }
-//    private fun testeCadastrarLocal() {
-//        userDao.salvaLocal(
-//            DadosLocal(
-//            foto = BancodeDados.foto,
-//            nomelocal = "SEJEL",
-//            horario = "08:00 até 22:00",
-//            linklocal = "https://goo.gl/maps/9aphYVFfA2uUv9t1A",
-//            esporte = "Futebol",
-//            descricao = "A SEJEL foi criada em 2002, tendo como objetivo o amparo ao desporto, a " +
-//                    "promoção, a difusão das atividades desportivas e a promoção do esporte amador."
-//        )
-//        )
-//    }
+    private fun testeCadastrarLocal() {
+        if (userDao.buscarLocais().isEmpty()) {
+            userDao.salvaLocal(
+                DadosLocal(
+                    id = 1,
+                    foto = BancodeDados.foto,
+                    nomelocal = "SEJEL",
+                    horario = "08:00 até 22:00",
+                    linklocal = "https://goo.gl/maps/9aphYVFfA2uUv9t1A",
+                    esporte = "Futebol",
+                    descricao = "A SEJEL foi criada em 2002, tendo como objetivo o amparo ao desporto, a " +
+                            "promoção, a difusão das atividades desportivas e a promoção do esporte amador."
+                )
+            )
+        }
+    }
 }

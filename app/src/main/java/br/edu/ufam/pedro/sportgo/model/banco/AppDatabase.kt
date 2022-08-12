@@ -17,7 +17,7 @@ abstract class AppDatabase : RoomDatabase(){
                 context,
                 AppDatabase::class.java,
                 "sportgo.db"
-            ).allowMainThreadQueries()
+            ).allowMainThreadQueries().fallbackToDestructiveMigration() // fallbackToDestructiveMigration destroi o banco anterior e constroi um novo e perde todos os dados anteriores
                 .build()
         }
     }

@@ -94,22 +94,34 @@ class HomeFragment: Fragment() {
         override fun onItemClick(item: MenuSquareItem) {
             when (item.drawable) {
                 R.drawable.ic_futebol -> {
-                    Toast.makeText(activity, "Clicou em futebol!", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(activity, "Clicou em futebol!", Toast.LENGTH_LONG).show()
+                    Preferences.setEsporte(requireContext(),"Futebol")
+                    findNavController().navigate(R.id.action_home_to_lista_de_esporte_selecionado)
                 }
                 R.drawable.ic_american_football -> {
-                    Toast.makeText(activity, "Clicou em futebol Americano!", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(activity, "Clicou em futebol Americano!", Toast.LENGTH_LONG).show()
+                    Preferences.setEsporte(requireContext(),"Futebol Americano")
+                    findNavController().navigate(R.id.action_home_to_lista_de_esporte_selecionado)
                 }
                 R.drawable.ic_basketball -> {
-                    Toast.makeText(activity, "Clicou em basketball!", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(activity, "Clicou em basketball!", Toast.LENGTH_LONG).show()
+                    Preferences.setEsporte(requireContext(),"Basketball")
+                    findNavController().navigate(R.id.action_home_to_lista_de_esporte_selecionado)
                 }
                 R.drawable.ic_voleyball -> {
-                    Toast.makeText(activity, "Clicou em voleyball!", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(activity, "Clicou em voleyball!", Toast.LENGTH_LONG).show()
+                    Preferences.setEsporte(requireContext(),"Voleyball")
+                    findNavController().navigate(R.id.action_home_to_lista_de_esporte_selecionado)
                 }
                 R.drawable.ic_tennis -> {
-                    Toast.makeText(activity, "Clicou em tennis!", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(activity, "Clicou em tennis!", Toast.LENGTH_LONG).show()
+                    Preferences.setEsporte(requireContext(),"Tennis")
+                    findNavController().navigate(R.id.action_home_to_lista_de_esporte_selecionado)
                 }
                 R.drawable.ic_ping_pong -> {
-                    Toast.makeText(activity, "Clicou em ping pong!", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(activity, "Clicou em ping pong!", Toast.LENGTH_LONG).show()
+                    Preferences.setEsporte(requireContext(),"Ping Pong")
+                    findNavController().navigate(R.id.action_home_to_lista_de_esporte_selecionado)
                 }
             }
         }
