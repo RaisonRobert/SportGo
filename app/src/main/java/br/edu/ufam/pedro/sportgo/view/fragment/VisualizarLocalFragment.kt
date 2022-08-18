@@ -15,6 +15,8 @@ import android.util.Log
 import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -30,6 +32,7 @@ import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
 import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import kotlinx.android.synthetic.main.dialog_apaga_conta.view.*
+import kotlinx.android.synthetic.main.layout_fragment_cadastrar_local.view.*
 import kotlinx.android.synthetic.main.layout_visualiza_admin_fragment.*
 import kotlinx.android.synthetic.main.layout_visualiza_admin_fragment.view.*
 import java.io.File
@@ -88,7 +91,7 @@ class VisualizarLocalFragment : Fragment() {
             nomelocal = nomefieldLocalVisualizar.text.toString(),
             horario = nomefieldHorarioVisualizar.text.toString(),
             linklocal = nomefieldLinkMapsVisualizar.text.toString(),
-            esporte = nomefieldEsporteVisualizar.text.toString(),
+            esporte = menu_esporte_visualizar.text.toString(),
             descricao = nomefieldDescVisualizar.text.toString()
 
         )
@@ -242,10 +245,10 @@ class VisualizarLocalFragment : Fragment() {
         }
         BancodeDados.dadosLocal.esporte?.let {
             if (it.isNotEmpty()) {
-                view.nomefieldEsporteVisualizar.setText(it)
+                view.menu_esporte_visualizar.setText(it)
             } else
-                view.nomefieldEsporteVisualizar.setText(NAO_POSSUI)
-            view.nomefieldEsporteVisualizar.isEnabled = false
+                view.menu_esporte_visualizar.setText(NAO_POSSUI)
+            view.menu_esporte_visualizar.isEnabled = false
         }
         BancodeDados.dadosLocal.descricao?.let {
             if (it.isNotEmpty()) {
@@ -259,6 +262,7 @@ class VisualizarLocalFragment : Fragment() {
 
     @Suppress("DEPRECATION")
     private fun setHeader(view: View) {
+
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         this.profile_photo = view.findViewById(R.id.imageButtonTirarFotoVisualizar) as ImageView
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)
@@ -321,7 +325,7 @@ class VisualizarLocalFragment : Fragment() {
         nomefieldLocalVisualizar.isEnabled = true
         nomefieldHorarioVisualizar.isEnabled = true
         nomefieldLinkMapsVisualizar.isEnabled = true
-        nomefieldEsporteVisualizar.isEnabled = true
+        menu_esporte_visualizar.isEnabled = true
         nomefieldDescVisualizar.isEnabled = true
         if (nomefieldLocalVisualizar.text.toString() == NAO_POSSUI) {
             nomefieldLocalVisualizar.setText("")
@@ -332,9 +336,13 @@ class VisualizarLocalFragment : Fragment() {
         if (nomefieldLinkMapsVisualizar.text.toString() == NAO_POSSUI) {
             nomefieldLinkMapsVisualizar.setText("")
         }
-        if (nomefieldEsporteVisualizar.text.toString() == NAO_POSSUI) {
-            nomefieldEsporteVisualizar.setText("")
+        if (menu_esporte_visualizar.text.toString() == NAO_POSSUI) {
+            menu_esporte_visualizar.setText("")
         }
+            val items = listOf("Futebol", "Futebol Americano", "Basketball", "Voleyball", "Tennis", "Ping Pong")
+            val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
+            (nomeLayoutEsporteVisualizar.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+
         if (nomefieldDescVisualizar.text.toString() == NAO_POSSUI) {
             nomefieldDescVisualizar.setText("")
         }

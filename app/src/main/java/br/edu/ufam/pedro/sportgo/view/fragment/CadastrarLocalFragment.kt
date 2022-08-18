@@ -16,12 +16,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.FileProvider
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import br.edu.ufam.pedro.sportgo.R
@@ -30,6 +30,7 @@ import br.edu.ufam.pedro.sportgo.controller.ui.Ui
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import kotlinx.android.synthetic.main.layout_fragment_cadastrar_local.*
+import kotlinx.android.synthetic.main.layout_fragment_cadastrar_local.view.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -67,10 +68,17 @@ class CadastrarLocalFragment : Fragment() {
             dispatchTakePictureIntent()
         }
         btnCadastrar.setOnClickListener {
-//            val local =  montarBody()
-//            Log.i("teste", "$local")
-            userDao.salvaLocal(montarBody())
-            findNavController().popBackStack(R.id.home_admin, false)
+            val local =  montarBody()
+            Log.i("teste", "$local")
+            val body = montarBody()
+            if(!body.esporte.isNullOrEmpty()){
+                userDao.salvaLocal(body)
+                findNavController().popBackStack(R.id.home_admin, false)
+            }else {
+                nomeLayoutEsporte.error = "Escolha o Esporte"
+//                Toast.makeText(requireContext(),"Escolha o Esporte", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 
@@ -89,7 +97,7 @@ class CadastrarLocalFragment : Fragment() {
             nomelocal = nomefieldLocal.text.toString(),
             horario = nomefieldHorario.text.toString(),
             linklocal = nomefieldLinkMaps.text.toString(),
-            esporte = nomefieldDesc.text.toString(),
+            esporte = menu_esporte.text.toString(),
             descricao = nomefieldEsporte.text.toString()
         )
         return cadastro
@@ -214,6 +222,9 @@ class CadastrarLocalFragment : Fragment() {
     }
 
     private fun setHeader(view: View) {
+        val items = listOf("Futebol", "Futebol Americano", "Basketball", "Voleyball", "Tennis", "Ping Pong")
+        val adapter = ArrayAdapter(requireContext(), R.layout.list_item, items)
+        (view.nomeLayoutEsporte.editText as? AutoCompleteTextView)?.setAdapter(adapter)
         this.profile_photo = view.findViewById(R.id.imageButtonTirarFoto) as ImageView
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)

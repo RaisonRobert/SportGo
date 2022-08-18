@@ -18,7 +18,7 @@
         <entry key="app/src/main/res/layout/item_lista_cadastro.xml" value="0.17502532928064843" />
         <entry key="app/src/main/res/layout/item_square.xml" value="0.35989583333333336" />
         <entry key="app/src/main/res/layout/layout_fragment_alterar_dados.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/layout_fragment_cadastrar_local.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/layout_fragment_cadastrar_local.xml" value="0.29668874172185433" />
         <entry key="app/src/main/res/layout/layout_fragment_criar_conta.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout_fragment_home.xml" value="0.35989583333333336" />
         <entry key="app/src/main/res/layout/layout_fragment_login.xml" value="0.20989583333333334" />
@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/layout/layout_visualiza_admin_fragment.xml" value="0.18568840579710144" />
         <entry key="app/src/main/res/layout/layout_visualiza_dados_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout_webview_fragment.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.11005434782608696" />
         <entry key="app/src/main/res/menu/menu_cadastra.xml" value="0.18981481481481483" />
         <entry key="app/src/main/res/menu/menu_home.xml" value="0.18981481481481483" />
         <entry key="app/src/main/res/menu/menu_home_admin.xml" value="0.18981481481481483" />

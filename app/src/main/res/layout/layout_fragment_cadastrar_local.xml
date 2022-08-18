@@ -96,28 +96,29 @@
                 android:drawableStart="@drawable/ic_add_map"             android:drawablePadding="12dp"
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nomeLayoutEsporte"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:hint="Digite um esporte"
-            android.support.design:hintAnimationEnabled="true"
-            android.support.design:hintEnabled="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nomeLayoutLinkMaps">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nomefieldDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_sports"
-                android:drawablePadding="12dp"
-                android:inputType ="textPersonName" />
-        </com.google.android.material.textfield.TextInputLayout>
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/nomeLayoutEsporte"-->
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_marginStart="30dp"-->
+<!--            android:layout_marginEnd="30dp"-->
+<!--            android:hint="Digite um esporte"-->
+<!--            android.support.design:hintAnimationEnabled="true"-->
+<!--            android.support.design:hintEnabled="true"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/nomeLayoutLinkMaps">-->
+
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/nomefieldDesc"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:drawableStart="@drawable/ic_sports"-->
+<!--                android:drawablePadding="12dp"-->
+<!--                android:inputType="textPersonName" />-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nomeLayoutDesc"
@@ -178,6 +179,25 @@
             app:layout_constraintStart_toStartOf="@+id/imageButtonTirarFoto"
             app:layout_constraintTop_toBottomOf="@+id/imageButtonTirarFoto" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nomeLayoutEsporte"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:hint="Selecione o Esporte"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nomeLayoutLinkMaps">
+            <AutoCompleteTextView
+                android:id="@+id/menu_esporte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

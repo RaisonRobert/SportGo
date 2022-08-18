@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.TimePicker
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -17,7 +19,7 @@ import kotlinx.android.synthetic.main.layout_visualiza_dados_fragment.view.*
 
 class VisualizarDadosMapLocalFragment : Fragment(){
     private lateinit var userDao: DadosDao
-    private val NAO_POSSUI = "Não Possui Dados Cadastrado"
+    private val NAO_POSSUI = "Não Possui Informação"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val db = AppDatabase.instancia(requireContext())
@@ -40,7 +42,11 @@ class VisualizarDadosMapLocalFragment : Fragment(){
 
     private fun botao(view: View) {
         view.btnLocal.setOnClickListener {
-            findNavController().navigate(R.id.action_detalhes_local_to_web_view)
+            if(!BancodeDados.dadosLocal.linklocal.isNullOrEmpty()){
+                findNavController().navigate(R.id.action_detalhes_local_to_web_view)
+            }else
+                Toast.makeText(requireContext(),"Link do local não está disponível",Toast.LENGTH_SHORT).show()
+
         }
     }
 
@@ -52,7 +58,7 @@ class VisualizarDadosMapLocalFragment : Fragment(){
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         val headerLayout = view.findViewById<View>(R.id.headerView)
         val titlePage = headerLayout.findViewById<TextView>(R.id.title)
-        titlePage.setText("Visualizar Dados de ${BancodeDados.dadosLocal.nomelocal}")
+        titlePage.setText("Visualizar Detalhes")
         toolbar.setNavigationOnClickListener {
             findNavController().popBackStack(R.id.lista_de_esporte_selecionado, false)
         }
@@ -67,21 +73,21 @@ class VisualizarDadosMapLocalFragment : Fragment(){
                 view.textView.setText("Esporte Praticado: $it")
             } else
                 view.textView.setText(NAO_POSSUI)
-            view.textView.isEnabled = false
+
         }
         BancodeDados.dadosLocal.horario?.let {
             if (it.isNotEmpty()) {
                 view.txtHorario.setText(it)
             } else
-                view.txtHorario.setText(NAO_POSSUI)
-            view.txtHorario.isEnabled = false
+                view.txtHorario.setText(NAO_POSSUI + " de Horario")
+
         }
         BancodeDados.dadosLocal.descricao?.let {
             if (it.isNotEmpty()) {
                 view.txtDescLocalEsporte.setText(it)
             } else
-                view.txtDescLocalEsporte.setText(NAO_POSSUI)
-            view.txtDescLocalEsporte.isEnabled = false
+                view.txtDescLocalEsporte.setText(NAO_POSSUI+ " de descrição")
+
         }
     }
 }
