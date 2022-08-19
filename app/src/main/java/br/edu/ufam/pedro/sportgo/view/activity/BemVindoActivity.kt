@@ -35,7 +35,7 @@ class BemVindoActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.P)
     private fun time() {
         val intent = Intent(this, LoginActivity::class.java)
-        val timer = object : CountDownTimer(6000, 1000) {
+        val timer = object : CountDownTimer(7000, 1000) {
             @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
             }

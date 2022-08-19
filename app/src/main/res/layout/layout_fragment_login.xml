@@ -17,13 +17,14 @@
             android:id="@+id/animationLogin"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/login" />
+            app:lottie_rawRes="@raw/loginbike" />
 
         <TextView
             android:id="@+id/txtLogin"

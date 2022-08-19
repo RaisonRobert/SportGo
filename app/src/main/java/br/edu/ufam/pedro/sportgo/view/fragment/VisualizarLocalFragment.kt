@@ -15,10 +15,7 @@ import android.util.Log
 import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -32,8 +29,9 @@ import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
 import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import kotlinx.android.synthetic.main.dialog_apaga_conta.view.*
-import kotlinx.android.synthetic.main.layout_fragment_cadastrar_local.view.*
 import kotlinx.android.synthetic.main.layout_visualiza_admin_fragment.*
+import kotlinx.android.synthetic.main.layout_visualiza_admin_fragment.nomeLayoutDesc
+import kotlinx.android.synthetic.main.layout_visualiza_admin_fragment.nomeLayoutLocal
 import kotlinx.android.synthetic.main.layout_visualiza_admin_fragment.view.*
 import java.io.File
 import java.io.FileOutputStream
@@ -70,12 +68,32 @@ class VisualizarLocalFragment : Fragment() {
 
     private fun botoesAlterar() {
             imageButtonTirarFotoVisualizar.setOnClickListener {
-                dispatchTakePictureIntent()            }
+                dispatchTakePictureIntent()
+            }
         btnAlterar.setOnClickListener {
-            BancodeDados.dadosLocal = montarBody()
-            Log.i("teste","dado update: ${BancodeDados.dadosLocal}")
-            userDao.alterarDadosLocal(BancodeDados.dadosLocal)
-            findNavController().popBackStack(R.id.home_admin, false)
+            val body = montarBody()
+
+
+                if((body.esporte!!.isNotEmpty() && body.nomelocal!!.isNotEmpty()) && body.descricao!!.isNotEmpty()){
+                    BancodeDados.dadosLocal = body
+//                    Toast.makeText(requireContext(),"salvou", Toast.LENGTH_SHORT).show()
+//                    Log.i("teste","dado update: ${BancodeDados.dadosLocal}")
+                    userDao.alterarDadosLocal(BancodeDados.dadosLocal)
+                    findNavController().popBackStack(R.id.home_admin, false)
+                }
+                if(body.nomelocal.isNullOrEmpty()) {
+                    nomeLayoutLocal.error = "Digite o Nome do Local"
+                }
+                if(body.esporte.isNullOrEmpty()){
+                    nomeLayoutEsporteVisualizar.error = "Escolha o Esporte"
+//                Toast.makeText(requireContext(),"Escolha o Esporte", Toast.LENGTH_SHORT).show()
+                }
+                if(body.descricao.isNullOrEmpty()){
+                    nomeLayoutDesc.error = "Digite uma breve descrição"
+                }
+
+
+
         }
     }
 
@@ -104,7 +122,7 @@ class VisualizarLocalFragment : Fragment() {
     @Suppress("DEPRECATION")
     private fun dispatchTakePictureIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+//        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(requireActivity().packageManager) != null) {
             try {
                 photoFile = Ui.createImageFile(requireContext())

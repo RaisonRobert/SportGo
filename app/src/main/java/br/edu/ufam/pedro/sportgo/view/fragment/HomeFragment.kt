@@ -66,7 +66,7 @@ class HomeFragment: Fragment() {
     private fun setupMenu() {
         val menuItens = ArrayList<MenuSquareItem>()
         menuItens.add(MenuSquareItem("Futebol", R.drawable.ic_futebol))
-        menuItens.add(MenuSquareItem("Futebol Americano", R.drawable.ic_american_football))
+        menuItens.add(MenuSquareItem("Futebol \nAmericano", R.drawable.ic_american_football))
         menuItens.add(MenuSquareItem("Basketball", R.drawable.ic_basketball))
         menuItens.add(MenuSquareItem("Voleyball", R.drawable.ic_voleyball))
         menuItens.add(MenuSquareItem("Tennis", R.drawable.ic_tennis))

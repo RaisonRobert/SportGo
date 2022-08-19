@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.BemVindoActivity">
+    tools:context=".view.activity.BemVindoActivity">
 
     <TextView
         android:id="@+id/txtBemVindo"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtBemVindo"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/bem_vindo" />
+        app:lottie_rawRes="@raw/loading" />
 
     <TextView
         android:id="@+id/txtBemVindoDesc"

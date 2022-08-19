@@ -31,6 +31,7 @@ import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import kotlinx.android.synthetic.main.layout_fragment_cadastrar_local.*
 import kotlinx.android.synthetic.main.layout_fragment_cadastrar_local.view.*
+import kotlinx.android.synthetic.main.layout_fragment_criar_conta.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -68,15 +69,22 @@ class CadastrarLocalFragment : Fragment() {
             dispatchTakePictureIntent()
         }
         btnCadastrar.setOnClickListener {
-            val local =  montarBody()
-            Log.i("teste", "$local")
+//            val local =  montarBody()
+//            Log.i("teste", "$local")
             val body = montarBody()
-            if(!body.esporte.isNullOrEmpty()){
+            if(!(body.esporte.isNullOrEmpty() && body.nomelocal.isNullOrEmpty()) && !(body.descricao.isNullOrEmpty())){
                 userDao.salvaLocal(body)
                 findNavController().popBackStack(R.id.home_admin, false)
-            }else {
+            }
+            if(body.nomelocal.isNullOrEmpty()) {
+                nomeLayoutLocal.error = "Digite o Nome do Local"
+            }
+            if(body.esporte.isNullOrEmpty()){
                 nomeLayoutEsporte.error = "Escolha o Esporte"
 //                Toast.makeText(requireContext(),"Escolha o Esporte", Toast.LENGTH_SHORT).show()
+            }
+            if(body.descricao.isNullOrEmpty()){
+                nomeLayoutDesc.error = "Digite uma breve descrição"
             }
 
         }
@@ -109,7 +117,7 @@ class CadastrarLocalFragment : Fragment() {
     @Suppress("DEPRECATION")
     private fun dispatchTakePictureIntent() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+//        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
         if (takePictureIntent.resolveActivity(requireActivity().packageManager) != null) {
             try {
                 photoFile = Ui.createImageFile(requireContext())
