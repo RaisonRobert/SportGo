@@ -1,14 +1,12 @@
-package br.edu.ufam.pedro.sportgo.controller.ui
+package br.edu.ufam.pedro.sportgo.view.ui
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.os.Build
 import android.os.Environment
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import br.edu.ufam.pedro.sportgo.R
 import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
@@ -16,9 +14,6 @@ import br.edu.ufam.pedro.sportgo.model.entidade.DadosLogin
 import kotlinx.android.synthetic.main.dialog_modal.view.*
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
 object Ui {
     /**
@@ -56,9 +51,7 @@ object Ui {
         subtitle: String,
         description: String?
     ): AlertDialog? {
-
         val mDialogView = LayoutInflater.from(context).inflate(R.layout.dialog_modal, null)
-
         var modalIcon = mDialogView.findViewById<ImageView>(R.id.iconDialog)
         var modalTitle = mDialogView.findViewById<TextView>(R.id.titleDialog)
         var modalSubtitle = mDialogView.findViewById<TextView>(R.id.subtitleDialog)
@@ -75,7 +68,6 @@ object Ui {
 
         mDialogView.buttonOK.setOnClickListener{
             mAlertDialog.dismiss()
-
         }
         return mAlertDialog
     }

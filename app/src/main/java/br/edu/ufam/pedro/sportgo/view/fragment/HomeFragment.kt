@@ -2,10 +2,8 @@ package br.edu.ufam.pedro.sportgo.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -19,10 +17,9 @@ import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
 import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
 import br.edu.ufam.pedro.sportgo.model.banco.Preferences
-import br.edu.ufam.pedro.sportgo.view.Util.MenuSquareItem
-import br.edu.ufam.pedro.sportgo.view.activity.LoginActivity
+import br.edu.ufam.pedro.sportgo.view.util.MenuSquareItem
+import br.edu.ufam.pedro.sportgo.controller.activity.LoginActivity
 import kotlinx.android.synthetic.main.dialog_apaga_conta.view.*
-import kotlinx.android.synthetic.main.layout_fragment_criar_conta.view.*
 
 class HomeFragment: Fragment() {
     private lateinit var userDao: DadosDao

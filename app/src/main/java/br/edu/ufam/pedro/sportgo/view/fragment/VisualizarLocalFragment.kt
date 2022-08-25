@@ -11,10 +11,7 @@ import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.*
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +21,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import br.edu.ufam.pedro.sportgo.R
 import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
-import br.edu.ufam.pedro.sportgo.controller.ui.Ui
+import br.edu.ufam.pedro.sportgo.view.ui.Ui
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
 import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal

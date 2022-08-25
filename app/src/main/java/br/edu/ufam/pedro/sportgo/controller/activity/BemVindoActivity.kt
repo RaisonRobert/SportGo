@@ -1,4 +1,4 @@
-package br.edu.ufam.pedro.sportgo.view.activity
+package br.edu.ufam.pedro.sportgo.controller.activity
 
 
 import android.Manifest
@@ -14,8 +14,6 @@ import androidx.core.app.ActivityCompat
 import br.edu.ufam.pedro.sportgo.R
 import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
-import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
-import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLogin
 
 class BemVindoActivity : AppCompatActivity() {

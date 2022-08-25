@@ -1,4 +1,4 @@
-package br.edu.ufam.pedro.sportgo.view.Util
+package br.edu.ufam.pedro.sportgo.view.util
 
 import androidx.annotation.DrawableRes
 

@@ -39,7 +39,7 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
@@ -54,7 +54,7 @@ dependencies {
     //Lottie Airbnb
     implementation 'com.airbnb.android:lottie:4.2.2'
     //room SQLite
-    def room_version = "2.3.0"
+    def room_version = "2.4.0"
     //noinspection GradleDependency
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"

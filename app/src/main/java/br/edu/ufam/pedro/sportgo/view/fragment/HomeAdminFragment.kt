@@ -2,15 +2,12 @@ package br.edu.ufam.pedro.sportgo.view.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufam.pedro.sportgo.R
@@ -21,8 +18,7 @@ import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
 import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
 import br.edu.ufam.pedro.sportgo.model.banco.Preferences
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
-import br.edu.ufam.pedro.sportgo.view.activity.LoginActivity
-import kotlinx.android.synthetic.main.dialog_apaga_conta.view.*
+import br.edu.ufam.pedro.sportgo.controller.activity.LoginActivity
 import kotlinx.android.synthetic.main.layout_home_admin_fragment.view.*
 
 class HomeAdminFragment : Fragment(), itemClickListenerCadastro {

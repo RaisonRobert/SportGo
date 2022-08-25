@@ -10,11 +10,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import br.edu.ufam.pedro.sportgo.R
 import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
-import br.edu.ufam.pedro.sportgo.controller.ui.Ui
+import br.edu.ufam.pedro.sportgo.view.ui.Ui
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
 import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLogin
-import br.edu.ufam.pedro.sportgo.view.activity.HomeActivity
+import br.edu.ufam.pedro.sportgo.controller.activity.HomeActivity
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.layout_fragment_criar_conta.view.*
 

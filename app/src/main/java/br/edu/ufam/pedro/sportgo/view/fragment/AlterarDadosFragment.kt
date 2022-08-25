@@ -1,7 +1,6 @@
 package br.edu.ufam.pedro.sportgo.view.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +11,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import br.edu.ufam.pedro.sportgo.R
 import br.edu.ufam.pedro.sportgo.controller.interfac.DadosDao
-import br.edu.ufam.pedro.sportgo.controller.ui.Ui
+import br.edu.ufam.pedro.sportgo.view.ui.Ui
 import br.edu.ufam.pedro.sportgo.model.banco.AppDatabase
 import br.edu.ufam.pedro.sportgo.model.banco.BancodeDados
 import br.edu.ufam.pedro.sportgo.model.banco.Preferences
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.layout_fragment_alterar_dados.view.*
 import kotlinx.android.synthetic.main.layout_fragment_alterar_dados.view.btnDeficiente
-import kotlinx.android.synthetic.main.layout_fragment_criar_conta.view.*
 
 class AlterarDadosFragment : Fragment(){
     private lateinit var userDao: DadosDao

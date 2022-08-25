@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufam.pedro.sportgo.R
 import br.edu.ufam.pedro.sportgo.controller.interfac.itemClickListenerCadastro
-import br.edu.ufam.pedro.sportgo.controller.ui.Ui
+import br.edu.ufam.pedro.sportgo.view.ui.Ui
 import br.edu.ufam.pedro.sportgo.model.entidade.DadosLocal
 import br.edu.ufam.pedro.sportgo.view.fragment.ListaEsporteSelecionadoFragment
 import kotlinx.android.synthetic.main.item_lista_cadastro.view.*

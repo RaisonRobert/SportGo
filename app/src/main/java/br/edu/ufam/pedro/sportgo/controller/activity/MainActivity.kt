@@ -1,4 +1,4 @@
-package br.edu.ufam.pedro.sportgo.view.activity
+package br.edu.ufam.pedro.sportgo.controller.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

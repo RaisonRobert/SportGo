@@ -8,7 +8,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import br.edu.ufam.pedro.sportgo.R
-import br.edu.ufam.pedro.sportgo.view.Util.MenuSquareItem
+import br.edu.ufam.pedro.sportgo.view.util.MenuSquareItem
 
 
 /**
